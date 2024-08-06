@@ -1,16 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie-edge">
-  <title>書き出しノート</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-  <main>
-    <h1>こんにちは</h1>
-  </main>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}書き出すノート{% endblock %}
+
+{% block content %}
+<div class="tools">
+  <div class="music">Music</div>
+  <div class="adjustment_buttons">
+    <div class="textcolor">
+      <div class="textcolor_label">色</div>
+      <div class="textcolor_box">選</div>
+    </div>
+    <div class="textsize">
+      <div class="textsize_label">大きさ</div>
+      <div class="textcolor_box">選</div>
+    </div>
+  </div>
+</div>
+<textarea></textarea><br>
+{% endblock %}
