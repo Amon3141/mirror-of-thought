@@ -5,16 +5,20 @@
 {% block content %}
 <div class="tools">
   <div class="music">Music</div>
-  <div class="adjustment_buttons">
+  <div class="adjustment-buttons">
     <div class="textcolor">
-      <div class="textcolor_label">色</div>
-      <div class="textcolor_box">選</div>
+      <div class="textcolor-label">色</div>
+      <div class="textcolor-picker-box">
+        <input type="color" class="textcolor-picker" value="#ffffff">
+      </div>
     </div>
     <div class="textsize">
-      <div class="textsize_label">大きさ</div>
-      <div class="textcolor_box">選</div>
+      <div class="textsize-label">大きさ</div>
+      <div class="textsize-input-box">
+        <input type="number" class="textsize-input" min="1" max="300" value="15">
+      </div>
     </div>
   </div>
 </div>
-<textarea></textarea><br>
+<textarea class="editor"></textarea><br>
 {% endblock %}
