@@ -1,4 +1,45 @@
+var mode = 'dark';
 const root = document.querySelector(':root');
+
+// setup the mode change buttons (light and dark)
+function setupModeButtons() {
+  const lightModeButton = document.querySelector('.light-mode-border');
+  const darkModeButton = document.querySelector('.dark-mode-border');
+  const appTitle= document.querySelector('.app-title-text');
+  if (!lightModeButton || !darkModeButton || !appTitle) return;
+
+  console.log('All elements detected for mode button');
+
+  lightModeButton.addEventListener('click', function() {
+    if (mode != 'light') {
+      root.style.setProperty('--primarycolor', '#1c1c1c');
+      root.style.setProperty('--textcolor', '#1c1c1c');
+      root.style.setProperty('--bordercolor', '#c0c0c0');
+      root.style.setProperty('--background1', '#d1d1d1');
+      root.style.setProperty('--background2', '#d9d9d9');
+      appTitle.style.setProperty('color', '#5c5c5c');
+      lightModeButton.style.setProperty('background', 'linear-gradient(-45deg, #00b2ff, #f36eff)');
+      darkModeButton.style.setProperty('background', '#343434');
+      mode = 'light';
+      console.log("light-mode button clicked");
+    }
+  });
+
+  darkModeButton.addEventListener('click', function() {
+    if (mode != 'dark') {
+      root.style.setProperty('--primarycolor', '#eeeeee');
+      root.style.setProperty('--textcolor', '#eeeeee');
+      root.style.setProperty('--bordercolor', '#515151');
+      root.style.setProperty('--background1', '#2b2b2b');
+      root.style.setProperty('--background2', '#343434');
+      appTitle.style.setProperty('color', '#cbcbcb');
+      lightModeButton.style.setProperty('background', '#d9d9d9');
+      darkModeButton.style.setProperty('background', 'linear-gradient(-45deg, #00b2ff, #f36eff)');
+      mode = 'dark';
+      console.log("dark-mode button clicked");
+    }
+  });
+}
 
 // setup the color picker function
 // when the user inputs a color, reflect it to --textcolor variable in styles.css
@@ -11,7 +52,7 @@ function setupColorPicker() {
   colorPicker.addEventListener('input', function() {
     root.style.setProperty('--textcolor', this.value);
     console.log(`colour changed to ${this.value}`);
-  })
+  });
 }
 
 // setup the textsize input function
@@ -26,11 +67,12 @@ function setupTextSizeInputter() {
     if (this.value > 300) this.value = 300; // the maximum value is 300
     root.style.setProperty('--textsize', `${this.value}px`);
     console.log(`textsize changed to ${this.value}`);
-  })
+  });
 }
 
 // main function
 function main() {
+  setupModeButtons();
   setupColorPicker();
   setupTextSizeInputter();
 }
@@ -38,4 +80,4 @@ function main() {
 // run main() after all the DOM contents are loaded
 document.addEventListener('DOMContentLoaded', function() {
   main();
-})
+});
