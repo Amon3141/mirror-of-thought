@@ -20,7 +20,7 @@ body {
 
 header {
   background-color: var(--background2);
-  padding-block: 1.3rem;
+  padding-block: 1.7rem;
 }
 
 .app-title {
@@ -30,8 +30,8 @@ header {
 
 .app-title-text {
   color: #ffffff;
-  font-size: 1.3rem;
-  margin-left: 2.3rem;
+  font-size: 1.5rem;
+  margin-left: 2.5rem;
 }
 
 main {
