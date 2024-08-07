@@ -12,10 +12,10 @@ function setupModeButtons() {
 
   lightModeButton.addEventListener('click', function() {
     if (mode != 'light') {
-      root.style.setProperty('--primarycolor', '#1c1c1c');
-      root.style.setProperty('--textcolor', '#1c1c1c');
+      root.style.setProperty('--primarycolor', '#2c2c2c');
+      root.style.setProperty('--textcolor', '#2c2c2c');
       root.style.setProperty('--bordercolor', '#c0c0c0');
-      root.style.setProperty('--background1', '#d1d1d1');
+      root.style.setProperty('--background1', '#cacaca');
       root.style.setProperty('--background2', '#d9d9d9');
       appTitle.style.setProperty('color', '#5c5c5c');
       lightModeButton.style.setProperty('background', 'linear-gradient(-45deg, #00b2ff, #f36eff)');
