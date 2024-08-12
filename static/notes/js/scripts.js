@@ -11,7 +11,7 @@ function setupModeButtons() {
   console.log('All elements detected for mode button');
 
   lightModeButton.addEventListener('click', function() {
-    if (mode != 'light') {
+    if (mode !== 'light') {
       root.style.setProperty('--primarycolor', '#2c2c2c');
       root.style.setProperty('--textcolor', '#2c2c2c');
       root.style.setProperty('--bordercolor', '#c0c0c0');
@@ -26,7 +26,7 @@ function setupModeButtons() {
   });
 
   darkModeButton.addEventListener('click', function() {
-    if (mode != 'dark') {
+    if (mode !== 'dark') {
       root.style.setProperty('--primarycolor', '#eeeeee');
       root.style.setProperty('--textcolor', '#eeeeee');
       root.style.setProperty('--bordercolor', '#515151');
@@ -70,11 +70,54 @@ function setupTextSizeInputter() {
   });
 }
 
+function setupResponseButton() {
+  const responseButton = document.querySelector('.response-button');
+  const editor = document.querySelector('.editor');
+  console.log("setupResponseButton() called");
+
+  if (!responseButton || !editor) return;
+
+  responseButton.addEventListener('click', function() {
+    const text = editor.value; // text value to send to the function
+    console.log(`text is: ${text}`);
+
+    fetch('/get_response/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCsrfToken()
+      },
+      body: JSON.stringify({ text: text })
+    })
+    .then(response => response.json())
+    .then(data => {
+      editor.value += '\n' + data.result;
+      console.log("Added text");
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    });
+  });
+}
+
+function getCsrfToken() {
+  const cookies = document.cookie.split(';');
+  for (const cookie of cookies) {
+      const [name, value] = cookie.split('=');
+      if (name.trim() === 'csrftoken') {
+          return value;
+      }
+  }
+  return '';
+}
+
 // main function
 function main() {
+  console.log("main program ran");
   setupModeButtons();
   setupColorPicker();
   setupTextSizeInputter();
+  setupResponseButton();
 }
 
 // run main() after all the DOM contents are loaded

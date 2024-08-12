@@ -4,6 +4,6 @@ from . import views
 app_name = 'notes'
 
 urlpatterns = [
-  path('', views.main, name='hello'),
-  path('<int:n>/', views.sub, name='sub'),
+  path('', views.notes, name='notes'),
+  path('get_response/', views.get_response, name='get_response'),
 ]
