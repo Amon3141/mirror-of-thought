@@ -85,10 +85,13 @@ function insertResponseBox(text) {
   response_text.className = 'model-response';
   response_text.innerText = text;
 
-  const linebreak = document.createElement('br');
+  const next_user_input = document.createElement('div');
+  next_user_input.className = 'user-input';
+  next_user_input.contentEditable = true;
+
   response_container.appendChild(response_text);
   editor.appendChild(response_container);
-  editor.appendChild(linebreak);
+  editor.appendChild(next_user_input);
 }
 
 function setupResponseButton() {
@@ -99,7 +102,17 @@ function setupResponseButton() {
   if (!responseButton || !editor) return;
 
   responseButton.addEventListener('click', function() {
-    const text = editor.value; // text value to send to the function
+    const user_inputs = editor.querySelectorAll('.user-input');
+    if (!user_inputs) {
+      console.error('No user input found');
+      return;
+    }
+    const last_user_input = user_inputs[user_inputs.length-1];
+    const text = last_user_input.textContent;
+    if (text === '') {
+      console.error('The user input is empty');
+      return;
+    }
 
     fetch('/get_response/', {
       method: 'POST',
@@ -111,7 +124,7 @@ function setupResponseButton() {
     })
     .then(response => response.json())
     .then(data => {
-      insertResponseBox(data.value);
+      insertResponseBox(data.result);
     })
     .catch((error) => {
       console.error('Error:', error)
@@ -130,6 +143,26 @@ function getCsrfToken() {
   return '';
 }
 
+// send a random message to the bot
+// because the first call is really slow
+function initiateChat() {
+  fetch('/get_response/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCsrfToken()
+    },
+    body: JSON.stringify({ text: "Help my self-reflection." })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Bot initiated');
+  })
+  .catch((error) => {
+    console.error('Error:', error)
+  });
+}
+
 // main function
 function main() {
   console.log("main program ran");
@@ -137,6 +170,7 @@ function main() {
   setupColorPicker();
   setupTextSizeInputter();
   setupResponseButton();
+  initiateChat();
 }
 
 // run main() after all the DOM contents are loaded
