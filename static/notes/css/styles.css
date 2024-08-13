@@ -176,17 +176,17 @@ main {
 }
 
 .model-response-container {
-  margin-block: 1rem;
+  margin-block: calc(var(--textsize) * 2 / 3);
 }
 
 .model-response {
   background-color: var(--model-response-backgroundcolor) !important;
   color: var(--model-response-textcolor);
   border: none;
-  border-radius: 3px;
+  border-radius: calc(var(--textsize) / 6);
   display: inline-block;
-  padding-block: 5px;
-  padding-inline: 10px;
+  padding-block: calc(var(--textsize, 15px) / 3);
+  padding-inline: calc(var(--textsize, 15px) * 2 / 3);
 }
 
 .user-input {
