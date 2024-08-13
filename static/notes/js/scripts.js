@@ -17,6 +17,8 @@ function setupModeButtons() {
       root.style.setProperty('--bordercolor', '#c0c0c0');
       root.style.setProperty('--background1', '#cacaca');
       root.style.setProperty('--background2', '#d9d9d9');
+      root.style.setProperty('--model-response-textcolor', '#494949');
+      root.style.setProperty('--model-response-backgroundcolor', '#ACC9CD');
       appTitle.style.setProperty('color', '#5c5c5c');
       lightModeButton.style.setProperty('background', 'linear-gradient(-45deg, #00b2ff, #f36eff)');
       darkModeButton.style.setProperty('background', '#343434');
@@ -32,6 +34,8 @@ function setupModeButtons() {
       root.style.setProperty('--bordercolor', '#515151');
       root.style.setProperty('--background1', '#2b2b2b');
       root.style.setProperty('--background2', '#343434');
+      root.style.setProperty('--model-response-textcolor', '#e2e2e2');
+      root.style.setProperty('--model-response-backgroundcolor', '#415C60');
       appTitle.style.setProperty('color', '#cbcbcb');
       lightModeButton.style.setProperty('background', '#d9d9d9');
       darkModeButton.style.setProperty('background', 'linear-gradient(-45deg, #00b2ff, #f36eff)');
@@ -70,6 +74,23 @@ function setupTextSizeInputter() {
   });
 }
 
+function insertResponseBox(text) {
+  const editor = document.querySelector('.editor');
+
+  const response_container = document.createElement('div');
+  response_container.className = 'model-response-container';
+  response_container.contentEditable = false;
+
+  const response_text = document.createElement('div');
+  response_text.className = 'model-response';
+  response_text.innerText = text;
+
+  const linebreak = document.createElement('br');
+  response_container.appendChild(response_text);
+  editor.appendChild(response_container);
+  editor.appendChild(linebreak);
+}
+
 function setupResponseButton() {
   const responseButton = document.querySelector('.response-button');
   const editor = document.querySelector('.editor');
@@ -79,7 +100,6 @@ function setupResponseButton() {
 
   responseButton.addEventListener('click', function() {
     const text = editor.value; // text value to send to the function
-    console.log(`text is: ${text}`);
 
     fetch('/get_response/', {
       method: 'POST',
@@ -91,8 +111,7 @@ function setupResponseButton() {
     })
     .then(response => response.json())
     .then(data => {
-      editor.value += '\n' + data.result;
-      console.log("Added text");
+      insertResponseBox(data.value);
     })
     .catch((error) => {
       console.error('Error:', error)

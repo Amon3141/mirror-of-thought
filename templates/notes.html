@@ -1,24 +1,29 @@
 {% extends "base.html" %}
 
-{% block title %}思考の鏡{% endblock %}
+{% block title %}Mirror of Thought{% endblock %}
 
 {% block content %}
 <div class="tools">
   <div class="adjustment-buttons">
     <div class="textcolor">
-      <div class="textcolor-label">色</div>
+      <div class="textcolor-label">Color</div>
       <div class="textcolor-picker-box">
         <input type="color" class="textcolor-picker" value="#ffffff">
       </div>
     </div>
     <div class="textsize">
-      <div class="textsize-label">大きさ</div>
+      <div class="textsize-label">Size</div>
       <div class="textsize-input-box">
         <input type="number" class="textsize-input" min="1" max="300" value="15">
       </div>
     </div>
   </div>
 </div>
-<textarea class="editor" contenteditable="true"></textarea>
+<div class="editor"f>
+  <div class="model-response-container" contenteditable="false">
+    <div class="model-response">I can understand. What made you think so?</div>
+  </div>
+  <div class="user-input" contenteditable="true"></div>
+</div>
 <button class="response-button">Button</button>
 {% endblock %}

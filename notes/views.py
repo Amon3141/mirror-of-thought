@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .testpython import testfunc
+from .ml_models.gemini_model import get_gemini_response
 
 # Create your views here.
 def notes(request):
@@ -14,7 +14,7 @@ def get_response(request):
     try:
       data =json.loads(request.body)
       text = data.get('text', '')
-      result = testfunc(text)
+      result = get_gemini_response(text)
       return JsonResponse({ 'result': result })
     
     except json.JSONDecodeError:
