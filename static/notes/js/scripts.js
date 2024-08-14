@@ -89,17 +89,16 @@ function insertResponseBox(text) {
   next_user_input.className = 'user-input';
   next_user_input.contentEditable = true;
 
+  const responseButton = document.querySelector('.dive-deeper-button');
+
   response_container.appendChild(response_text);
-  editor.appendChild(response_container);
-  editor.appendChild(next_user_input);
+  editor.insertBefore(response_container, responseButton);
+  editor.insertBefore(next_user_input, responseButton);
 }
 
 function setupResponseButton() {
-  const responseButton = document.querySelector('.response-button');
+  const responseButton = document.querySelector('.dive-deeper-button');
   const editor = document.querySelector('.editor');
-  console.log("setupResponseButton() called");
-
-  if (!responseButton || !editor) return;
 
   responseButton.addEventListener('click', function() {
     const user_inputs = editor.querySelectorAll('.user-input');
@@ -114,6 +113,9 @@ function setupResponseButton() {
       return;
     }
 
+    responseButton.innerHTML = '<div class="spinner"></div> Thinking...';
+    responseButton.classList.add('loading');
+
     fetch('/get_response/', {
       method: 'POST',
       headers: {
@@ -125,10 +127,24 @@ function setupResponseButton() {
     .then(response => response.json())
     .then(data => {
       insertResponseBox(data.result);
+      responseButton.innerHTML = 'Dive Deeper 💭';
+      responseButton.classList.remove('loading');
     })
     .catch((error) => {
-      console.error('Error:', error)
+      console.error('Error:', error);
+      responseButton.innerHTML = 'Dive Deeper 💭';
+      responseButton.classList.remove('loading');
     });
+  });
+
+  document.addEventListener('keydown', function(event) {
+    // Keyboard shortcut for Command + Enter
+    if ((event.metaKey || event.ctrlKey) && event.key == "Enter") {
+      event.preventDefault();
+      if (responseButton && !responseButton.classList.contains('loading')) {
+        responseButton.click();
+      }
+    }
   });
 }
 

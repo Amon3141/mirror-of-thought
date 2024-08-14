@@ -14,6 +14,7 @@ def get_response(request):
     try:
       data =json.loads(request.body)
       text = data.get('text', '')
+      print(f"The text is {text}") 
       result = send_message(text)
       print(f"The result is {result}")
       return JsonResponse({ 'result': result })
