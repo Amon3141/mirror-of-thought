@@ -12,35 +12,33 @@ function setupModeButtons() {
 
   lightModeButton.addEventListener('click', function() {
     if (mode !== 'light') {
-      root.style.setProperty('--primarycolor', '#2c2c2c');
+      root.style.setProperty('--primarycolor', '#404040');
       root.style.setProperty('--textcolor', '#2c2c2c');
       root.style.setProperty('--bordercolor', '#c0c0c0');
-      root.style.setProperty('--background1', '#cacaca');
-      root.style.setProperty('--background2', '#d9d9d9');
+      root.style.setProperty('--background1', '#dfdfdf');
+      root.style.setProperty('--background2', '#e8e8e8');
       root.style.setProperty('--model-response-textcolor', '#494949');
       root.style.setProperty('--model-response-backgroundcolor', '#ACC9CD');
-      appTitle.style.setProperty('color', '#5c5c5c');
+      appTitle.style.setProperty('color', '#434343');
       lightModeButton.style.setProperty('background', 'linear-gradient(-45deg, #00b2ff, #f36eff)');
-      darkModeButton.style.setProperty('background', '#343434');
+      darkModeButton.style.setProperty('background', 'none');
       mode = 'light';
-      console.log("light-mode button clicked");
     }
   });
 
   darkModeButton.addEventListener('click', function() {
     if (mode !== 'dark') {
-      root.style.setProperty('--primarycolor', '#eeeeee');
+      root.style.setProperty('--primarycolor', '#dcdcdc');
       root.style.setProperty('--textcolor', '#eeeeee');
       root.style.setProperty('--bordercolor', '#515151');
       root.style.setProperty('--background1', '#2b2b2b');
       root.style.setProperty('--background2', '#343434');
       root.style.setProperty('--model-response-textcolor', '#e2e2e2');
       root.style.setProperty('--model-response-backgroundcolor', '#415C60');
-      appTitle.style.setProperty('color', '#cbcbcb');
-      lightModeButton.style.setProperty('background', '#d9d9d9');
+      appTitle.style.setProperty('color', '#d2d2d2');
+      lightModeButton.style.setProperty('background', 'none');
       darkModeButton.style.setProperty('background', 'linear-gradient(-45deg, #00b2ff, #f36eff)');
       mode = 'dark';
-      console.log("dark-mode button clicked");
     }
   });
 }
