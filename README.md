@@ -1,2 +1,2 @@
 # Mirror Of Thought
-A simple web app for writing out your thoughts
+A simple self-reflection notebook with AI integration.
