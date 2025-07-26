@@ -2,6 +2,8 @@
 
 A self-reflection notebook with AI integration using Django and Google's Gemini AI.
 
+<img width="800" alt="Mirror of Thoughts demo" src="https://github.com/user-attachments/assets/3c6c7809-80f3-4c1a-a471-82836545d21b" />
+
 ## Features
 
 - Clean, minimalist text editor for journaling
