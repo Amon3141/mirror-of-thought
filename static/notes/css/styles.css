@@ -114,6 +114,7 @@ main {
   padding: 1rem;
   font-size: var(--textsize);
   outline: none;
+  line-height: 1.6;
 }
 
 .tools {
